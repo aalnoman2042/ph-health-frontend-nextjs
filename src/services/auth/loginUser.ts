@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 
-// import { getDefaultDashboardRoute, isValidRedirectForRole, UserRole } from "@/lib/auth-utils";
+import { getDefaultDashboardRoute, isValidRedirectForRole, UserRole } from "@/lib/auth-utils";
 import { parse } from "cookie";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -100,17 +100,17 @@ export const loginUser = async (_currentState: any, formData: any): Promise<any>
 
         }
 
-        // const userRole: UserRole = verifiedToken.role;
+        const userRole: UserRole = verifiedToken.role;
 
 
-        // if (redirectTo) {
-        //     const requestedPath = redirectTo.toString();
-        //     if (isValidRedirectForRole(requestedPath, userRole)) {
-        //         redirect(requestedPath);
-        //     } else {
-        //         redirect(getDefaultDashboardRoute(userRole));
-        //     }
-        // }
+        if (redirectTo) {
+            const requestedPath = redirectTo.toString();
+            if (isValidRedirectForRole(requestedPath, userRole)) {
+                redirect(requestedPath);
+            } else {
+                redirect(getDefaultDashboardRoute(userRole));
+            }
+        }
 
     } catch (error: any) {
         // Re-throw NEXT_REDIRECT errors so Next.js can handle them
