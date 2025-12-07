@@ -1,3 +1,5 @@
+
+
 export type UserRole = "ADMIN" | "DOCTOR" | "PATIENT";
 
 // exact : ["/my-profile", "settings"]
